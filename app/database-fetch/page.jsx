@@ -10,7 +10,7 @@ export default function Home() {
     async function fetchData() {
       setLoading(true); // Set loading to true before fetching data
       try {
-        const response = await fetch("/api/csv-convert"); // Fetching from the Next.js API route
+        const response = await fetch("/api/db-convert"); // Fetching from the Next.js API route
         const result = await response.json();
         setData(result);
       } catch (error) {
@@ -48,14 +48,14 @@ export default function Home() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200 max-w-2xl">
-            {data.slice(0, 25).map((row,index) => (
+            {data.slice(0, 7).map((index) => (
               <tr key={index}>
                 {headers.map((header) => (
                   <td
                     key={header}
                     className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
                   >
-                    <div className="px-12">{row[header]}</div>
+                    <div className="px-12">{[header]}</div>
                   </td>
                 ))}
               </tr>
