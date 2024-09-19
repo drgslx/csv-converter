@@ -53,7 +53,7 @@ export default function Home() {
                 {headers.map((header) => (
                   <td
                     key={header}
-                    className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                    className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
                   >
                     <div className="px-12">{row[header]}</div>
                   </td>
