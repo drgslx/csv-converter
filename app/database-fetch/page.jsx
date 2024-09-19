@@ -6,20 +6,19 @@ export default function Home() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true); // Set loading to true before fetching data
-      try {
-        const response = await fetch("/api/db-convert"); // Fetching from the Next.js API route
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false); // Set loading to false after data is fetched or an error occurs
-      }
-    }
+  async function fetchData() {
+    setLoading(true); // Set loading to true before fetching data
+    try {
+      const response = await fetch("/api/db-convert"); // Fetching from the Next.js API route
+      const result = await response.json();
+      setData(result);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } 
+      setLoading(false); // Set loading to false after data is fetched or an error occurs
+  }
 
+  useEffect(() => {
     fetchData();
   }, []);
 

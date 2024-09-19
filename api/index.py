@@ -6,22 +6,16 @@ import pandas as pd
 app = Flask(__name__)
 
 # MySQL Database Configuration
-db_config = {
-    'user': 'your_mysql_user',
-    'password': 'your_mysql_password',
-    'host': 'your_mysql_host',  # For example 'localhost' or your EC2 instance IP
-    'database': 'your_database_name',
-}
 
 @app.route("/api/csv-convert")
 def get_csv_as_json():
-    csv_path = os.path.join('public', 'google_dataset.csv')  # Adjust the path if necessary
+    csv_path = os.path.join('public', 'google_dataset.csv') 
     try:
         # Read the CSV file
         df = pd.read_csv(csv_path, on_bad_lines='warn')
 
         # Replace NaN values with None (to be converted to null in JSON)
-        df = df.applymap(lambda x: None if pd.isna(x) else x)
+        df = df.map(lambda x: None if pd.isna(x) else x)
 
         # Convert DataFrame to JSON
         data = df.to_dict(orient='records')
@@ -47,6 +41,15 @@ def get_json_data():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
+
+
+
+db_config = {
+    'user': 'your_mysql_user',
+    'password': 'your_mysql_password',
+    'host': 'your_mysql_host',  # For example 'localhost' or your EC2 instance IP
+    'database': 'your_database_name',
+}
 
 @app.route("/api/db-convert")
 def get_db_data_as_json():
